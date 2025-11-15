@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from src.entities import Field
 from src import CustomValueError
 
@@ -33,3 +33,34 @@ class Birthday(Field):
         This method returns birthday as datetime date
         """
         return self._value
+
+    def days_to_next_birthday(self) -> int | None:
+        """
+        Returns the number of days until the next birthday.
+        If birthday value is not set, returns None.
+        """
+        birthdate = self.get_birthday_as_date()
+        if not birthdate:
+            return None
+
+        today = date.today()
+        year = today.year
+
+        # Try to set next birthday in the current year
+        try:
+            next_birthday = birthdate.replace(year=year)
+        except ValueError:
+            # This usually happens for Feb 29 on non-leap year
+            # In that case, consider Feb 28 as the placeholder for calculation
+            # (adjust as per your business rules if needed)
+            next_birthday = birthdate.replace(year=year, month=2, day=28)
+
+        # If birthday this year already passed, move to next year
+        if next_birthday < today:
+            try:
+                next_birthday = birthdate.replace(year=year + 1)
+            except ValueError:
+                next_birthday = birthdate.replace(year=year + 1, month=2, day=28)
+
+        days_left = (next_birthday - today).days
+        return days_left
