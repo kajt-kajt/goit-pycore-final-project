@@ -2,7 +2,7 @@ from src.handlers.input_error import input_error
 from src.entities import AddressBook
 
 @input_error
-def birthdays(_: list[str], book: AddressBook):
+def birthdays(_: list[str], book: AddressBook, __):
     """
     Display list of contacts for greeting during next week
     """

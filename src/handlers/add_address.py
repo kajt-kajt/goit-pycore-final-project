@@ -2,7 +2,7 @@ from src.handlers.input_error import input_error
 from src.entities import AddressBook, Record
 
 @input_error
-def add_address(args: list[str], contacts: AddressBook) -> str:
+def add_address(args: list[str], contacts: AddressBook, _) -> str:
     """
     Adds address to contacts book object. 
     If contact with such name already exists, updates address for that user.

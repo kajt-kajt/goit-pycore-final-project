@@ -5,7 +5,7 @@ def _format_entry(command: str, description: str) -> str:
     return f"{command.ljust(HELP_PADDING)} - {description}"
 
 
-def show_help(_: list[str], __) -> str:
+def show_help(_: list[str], __, ___) -> str:
     """
     Display formatted help text with grouped commands.
     """

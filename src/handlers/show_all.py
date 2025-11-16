@@ -18,7 +18,7 @@ def _format_record(record) -> str:
     return "\n".join(lines)
 
 
-def show_all(_, contacts: AddressBook) -> str:
+def show_all(_, contacts: AddressBook, __) -> str:
     """
     Outputs all the contents of in-memory database of contacts.
     """
@@ -27,7 +27,7 @@ def show_all(_, contacts: AddressBook) -> str:
 
 
 @input_error
-def show_contact(args: list[str], contacts: AddressBook) -> str:
+def show_contact(args: list[str], contacts: AddressBook, _) -> str:
     """
     Outputs detailed information for a contact.
     """

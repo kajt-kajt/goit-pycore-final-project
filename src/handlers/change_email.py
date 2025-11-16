@@ -3,7 +3,7 @@ from src.entities import AddressBook
 
 
 @input_error
-def change_email(args: list[str], contacts: AddressBook) -> str:
+def change_email(args: list[str], contacts: AddressBook, _) -> str:
     """
     Replace an existing email for a contact with a new value.
     """
