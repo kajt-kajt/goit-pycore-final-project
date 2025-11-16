@@ -6,6 +6,8 @@ from src.entities.email import Email
 from src.entities.birthday import Birthday
 from src.entities.record import Record
 from src.entities.address_book import AddressBook
+from src.entities.note import Note
+from src.entities.notebook import NoteBook
 
 __all__ = ['Field', 
            'Name', 

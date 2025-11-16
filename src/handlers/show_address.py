@@ -2,7 +2,7 @@ from src.handlers.input_error import input_error
 from src.entities import AddressBook
 
 @input_error
-def show_address(args: list[str], contacts: AddressBook) -> str:
+def show_address(args: list[str], contacts: AddressBook, _) -> str:
     """
     Returns address for given name.
     Returns an error message if contact with such name is absent.

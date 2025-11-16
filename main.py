@@ -6,10 +6,11 @@ import pickle
 from collections import defaultdict
 from src.handlers import *
 from src.entities import AddressBook
+from src.entities import NoteBook
 
-def save_data(book: AddressBook, filename: str="addressbook.pkl") -> None:
+def save_data(book: list, filename: str="books.pkl") -> None:
     """
-    Save AddressBook with all its object hierarchy to file in binary format
+    Save AddressBook and NoteBook as array of 2 elements with all its object hierarchy to file in binary format
     "filename" may be empty or None to indicate that no saving is necessary.
     """
     if not filename:
@@ -20,22 +21,23 @@ def save_data(book: AddressBook, filename: str="addressbook.pkl") -> None:
     except IOError as e:
         print(f"Error saving state: {e}")
 
-def load_data(filename: str="addressbook.pkl") -> AddressBook:
+def load_data(filename: str="books.pkl") -> AddressBook:
     """
     Load AddressBook previously saved by "save_data" function
     """
     # empty str or None indicate to start with empty AddressBook
     if not filename:
-        return AddressBook()
+        return AddressBook(), NoteBook()
     try:
         with open(filename, "rb") as file:
-            return pickle.load(file)
+            books = pickle.load(file)
+            return books[0], books[1]
     except (IOError, EOFError) as e:
         # EOFError is for wrong file format
         print(f"Warning: unable to load state from '{filename}': {e}")
-        return AddressBook()
+        return AddressBook(), NoteBook()
 
-def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
+def main(start_empty: bool = False, filename: str = "books.pkl"):
     """
     Main loop for bot
 
@@ -47,9 +49,9 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
     """
 
     if start_empty:
-        contacts = load_data(None)
+        contacts, notes = load_data(None)
     else:
-        contacts = load_data(filename)
+        contacts, notes = load_data(filename)
 
     # command handlers
 
@@ -60,9 +62,9 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
 
     # all handlers should take 2 arguments - args list and contacts dictionary
     handlers = defaultdict(default_handler, {
-        "hello": lambda x,y: "How can I help you?",
-        "close": lambda x,y: "Good bye!",
-        "exit": lambda x,y: "Good bye!",
+        "hello": lambda x,y,z: "How can I help you?",
+        "close": lambda x,y,z: "Good bye!",
+        "exit": lambda x,y,z: "Good bye!",
         "add": add_contact,
         "add-phone": add_contact,
         "change": change_contact,
@@ -86,18 +88,20 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
         "birthdays": birthdays,
         "?": show_help,
         "help": show_help,
+        "add-note": add_note,
+        "show-notes": show_all_notes,
     })
 
-    print(show_help(None, None))
+    print(show_help(None, None, None))
 
     # main loop
     command = ""
     while command not in ["close", "exit"]:
         user_input = input("Enter a command: ")
         command, *args = parse_input(user_input)
-        print(handlers[command](args, contacts))
+        print(handlers[command](args, contacts, notes))
 
-    save_data(contacts, filename)
+    save_data([contacts, notes], filename)
 
 
 if __name__ == "__main__":
