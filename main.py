@@ -92,6 +92,9 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
         "show-notes": show_all_notes,
         "add-note-tag": add_note_tag,
         "remove-note-tag": remove_note_tag,
+        "delete-note-tag": remove_note_tag,
+        "remove-note": delete_note,
+        "delete-note": delete_note,
     })
 
     print(show_help(None, None, None))
