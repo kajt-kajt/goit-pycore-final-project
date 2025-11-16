@@ -10,6 +10,7 @@ from src.handlers.show_all import show_all, show_contact
 from src.handlers.add_birthday import add_birthday
 from src.handlers.show_birthday import show_birthday
 from src.handlers.birthdays import birthdays
+from src.handlers.show_help import show_help
 
 __all__ = ['add_contact',
            'change_contact',
@@ -24,4 +25,5 @@ __all__ = ['add_contact',
            'show_contact',
            'add_email',
            'add_address',
+           'show_help',
            ]

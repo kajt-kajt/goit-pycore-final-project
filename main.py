@@ -79,6 +79,8 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
         "show-address": show_address,
         "show-contact": show_contact,
         "birthdays": birthdays,
+        "?": show_help,
+        "help": show_help,
     })
 
     print("Welcome to the assistant bot!")
