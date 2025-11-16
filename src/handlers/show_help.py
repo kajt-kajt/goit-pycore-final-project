@@ -39,6 +39,17 @@ def show_help(_: list[str], __, ___) -> str:
             ],
         ),
         (
+            "--- Note Management ---",
+            [
+                ("add-note <text>", "Add a new note and assign it an ID."),
+                ("show-notes", "Display all stored notes."),
+                ("add-note-tag <id> <tag>", "Attach one or more tags to a note."),
+                ("remove-note-tag <id> <tag> [tag...]", "Remove tags from a note."),
+                ("delete-note <id>", "Delete a note by its ID."),
+                ("notes-by-tag <tag>", "Show all notes containing the given tag."),
+            ],
+        ),
+        (
             "--- Other Commands ---",
             [
                 ("help, ?", "Print all commands."),
