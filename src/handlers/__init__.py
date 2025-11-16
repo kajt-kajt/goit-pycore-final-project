@@ -17,6 +17,7 @@ from src.handlers.show_birthday import show_birthday
 from src.handlers.birthdays import birthdays
 from src.handlers.show_help import show_help
 from src.handlers.add_note import add_note
+from src.handlers.delete_note import delete_note
 from src.handlers.show_all_notes import show_all_notes
 from src.handlers.note_tags import add_note_tag, remove_note_tag
 
@@ -43,4 +44,5 @@ __all__ = ['add_contact',
            'delete_address',
            'add_note_tag',
            'remove_note_tag',
+           'delete_note',
            ]
