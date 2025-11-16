@@ -25,3 +25,14 @@ def remove_note_tag(args: list[str], _ , notes: NoteBook) -> str:
         if tag_name in notes[note_id].tags:
             notes[note_id].tags.remove(tag_name)
     return "Tag(-s) removed."
+
+def show_notes_by_tag(args: list[str], _ , notes: NoteBook) -> str:
+    """
+    Display all notes having specified tag
+    """
+    tag = args[0]
+    result_notes = []
+    for note in notes.values():
+        if tag in note.tags:
+            result_notes.append(note)
+    return "\n\n".join([str(note) for note in result_notes]) + "\n"
