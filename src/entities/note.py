@@ -14,4 +14,8 @@ class Note():
         self.tags = []
 
     def __str__(self):
-        return f"ID: {self.id}, created at {self.creation_date}\n{self._value}"
+        tag_line = " #".join(self.tags)
+        if tag_line:
+            tag_line = "\n   #"+tag_line
+        return f"ID: {self.id}, created at {self.creation_date}\n{self._value}{tag_line}"
+    
