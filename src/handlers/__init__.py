@@ -1,5 +1,6 @@
 from src.handlers.add_contact import add_contact
 from src.handlers.change_contact import change_contact
+from src.handlers.change_email import change_email
 from src.handlers.parse_input import parse_input
 from src.handlers.show_phone import show_phone
 from src.handlers.show_email import show_email
@@ -25,5 +26,6 @@ __all__ = ['add_contact',
            'show_contact',
            'add_email',
            'add_address',
+           'change_email',
            'show_help',
            ]

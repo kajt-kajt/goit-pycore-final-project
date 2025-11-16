@@ -67,6 +67,7 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
         "add-phone": add_contact,
         "change": change_contact,
         "change-phone": change_contact,
+        "change-email": change_email,
         "phone": show_phone,
         "show-phone": show_phone,
         "all": show_all,

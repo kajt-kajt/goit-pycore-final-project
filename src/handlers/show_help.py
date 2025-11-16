@@ -39,13 +39,14 @@ def show_help(_: list[str], __) -> str:
         ),
     ]
 
-    lines: list[str] = ["Welcome to the assistant bot!"]
+    lines: list[str] = ["Welcome to the assistant bot!", ""]
     for section_title, entries in sections:
         lines.append(section_title)
         for command, description in entries:
             lines.append(_format_entry(command, description))
         lines.append("")
-    return "\n".join(lines).rstrip()
+    lines.append("")
+    return "\n".join(lines).rstrip() + "\n"
 
 
 if __name__ == "__main__":
