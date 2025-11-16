@@ -1,12 +1,7 @@
 import re
 
 from src.entities import Field
-
-
-class CustomValueException(ValueError):
-    """
-    Raised when email value does not match expected format.
-    """
+from src import CustomValueError
 
 
 class Email(Field):
@@ -25,11 +20,11 @@ class Email(Field):
         value_str = super().validate_value(value).strip()
 
         if not value_str:
-            raise CustomValueException("Email can not be empty.")
+            raise CustomValueError("Email can not be empty.")
 
         if not self._email_regex.fullmatch(value_str):
             error_msg = f"Email format is not valid, got '{value_str}' instead."
-            raise CustomValueException(error_msg)
+            raise CustomValueError(error_msg)
 
         return value_str
     
