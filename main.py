@@ -73,6 +73,7 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
         "show-birthday": show_birthday,
         "show-email": show_email,
         "show-address": show_address,
+        "show-contact": show_contact,
         "birthdays": birthdays,
     })
 
