@@ -83,7 +83,7 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
         "help": show_help,
     })
 
-    show_help(None, None)
+    print(show_help(None, None))
 
     # main loop
     command = ""
