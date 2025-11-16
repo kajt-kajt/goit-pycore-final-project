@@ -1,3 +1,6 @@
+# Data files should not be committed
+*.pkl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
