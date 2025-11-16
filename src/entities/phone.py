@@ -5,14 +5,22 @@ from src import CustomValueError
 
 class Phone(Field):
     """
-    Class for phone number entity. Values are normalized to +380XXXXXXXXX format.
+    Class for phone number entity. Values are normalized to +380XXXXXXXXX format by default.
     """
 
     def validate_value(self, value: str) -> str:
         """
-        Normalize phone numbers to international +380 format
+        Normalize phone numbers to international +380 format unless explicit country code is used.
         """
         value_str = super().validate_value(value)
+
+        # Preserve explicit US/international numbers (e.g. +1...) removing only spaces and parentheses
+        if value_str.strip().startswith("+1"):
+            cleaned = re.sub(r"[()\s]", "", value_str)
+            if len(cleaned) < 4:
+                raise CustomValueError("Phone number is too short.")
+            return cleaned
+
         digits_only = re.sub(r"\D", "", value_str)
 
         if not digits_only:
