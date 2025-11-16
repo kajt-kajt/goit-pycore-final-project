@@ -4,8 +4,30 @@ Entry point
 
 import pickle
 from collections import defaultdict
+from typing import Callable
 from src.handlers import *
+from src.handlers.parse_input import CommandHandler
 from src.entities import AddressBook
+from src.ui.user_session import UserSession
+# from src.ui.command_list import COMMANDS
+
+        
+COMMANDS = {
+    "contacts": {
+        "list": CommandHandler(handler_function = show_names, 
+                               description = "List all contact names from AddressBook"),
+        "show": {
+            "all" : CommandHandler(handler_function = show_all,
+                                   description = "Display full table of contacts"),
+            "<field>" : CommandHandler(handler_function = show_field,
+                                       description = "Display Name and particular field only out of table of contacts"),
+        },
+        "<name>" : {
+            "show": "show_contact"
+        }
+    }
+}
+
 
 def save_data(book: AddressBook, filename: str="addressbook.pkl") -> None:
     """
@@ -46,10 +68,10 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
         None or empty string would indicate to work in memory only. 
     """
 
-    if start_empty:
-        contacts = load_data(None)
-    else:
-        contacts = load_data(filename)
+    #if start_empty:
+    #    contacts = load_data(None)
+    #else:
+    #    contacts = load_data(filename)
 
     # command handlers
 
@@ -69,19 +91,26 @@ def main(start_empty: bool = False, filename: str = "addressbook.pkl"):
         "all": show_all,
         "add-birthday": add_birthday,
         "show-birthday": show_birthday,
+        "add-email": add_email,
+        "show-email": show_email,
         "birthdays": birthdays,
     })
 
-    print("Welcome to the assistant bot!")
+    #user_session = UserSession()
+    #user_session.start()
 
-    # main loop
-    command = ""
-    while command not in ["close", "exit"]:
-        user_input = input("Enter a command: ")
-        command, *args = parse_input(user_input)
-        print(handlers[command](args, contacts))
+    handler, args = parse_input("contacts show all", COMMANDS)
+    print(handler)
+    print(args)
 
-    save_data(contacts, filename)
+#    # main loop
+#    command = ""
+#    while command not in ["close", "exit"]:
+#        user_input = input("Enter a command: ")
+#        command, *args = parse_input(user_input)
+#        print(handlers[command](args, contacts))
+#
+#    save_data(contacts, filename)
 
 
 if __name__ == "__main__":
