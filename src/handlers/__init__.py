@@ -1,6 +1,10 @@
 from src.handlers.add_contact import add_contact
 from src.handlers.change_contact import change_contact
+from src.handlers.delete_contact import delete_contact
 from src.handlers.change_email import change_email
+from src.handlers.delete_phone import delete_phone
+from src.handlers.delete_email import delete_email
+from src.handlers.delete_address import delete_address
 from src.handlers.parse_input import parse_input
 from src.handlers.show_phone import show_phone
 from src.handlers.show_email import show_email
@@ -32,4 +36,8 @@ __all__ = ['add_contact',
            'show_help',
            'add_note',
            'show_all_notes',
+           'delete_contact',
+           'delete_phone',
+           'delete_email',
+           'delete_address',
            ]
