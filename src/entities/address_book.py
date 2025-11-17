@@ -43,3 +43,10 @@ class AddressBook(UserDict):
         """
         return self.pop(name, None)
 
+    def search_by_pattern(self, pattern: str) -> str:
+        """
+        Search all text fields of each record for a match of a pattern
+        """
+        results = [record.search_by_pattern(pattern) for record in self.values()]
+        return "\n".join([value for value in results if value])
+

@@ -99,6 +99,7 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
         "remove-note": delete_note,
         "delete-note": delete_note,
         "notes-by-tag": show_notes_by_tag,
+        "search-contacts": search_contacts,
     })
 
     print(show_help(None, None, None))
