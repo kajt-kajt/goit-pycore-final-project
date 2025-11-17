@@ -15,7 +15,15 @@ class Record:
         birthday_info = self.get_birthday()
         if birthday_info:
             birthday_info = f"({birthday_info})"
-        return f"{self.name}{birthday_info}: {'; '.join(str(p) for p in self.phones)}"
+        phones_info = '; '.join(str(p) for p in self.phones)
+        emails_info = '; '.join(str(p) for p in self.emails)
+        delimiter1 = ""
+        delimiter2 = ""
+        if phones_info and emails_info:
+            delimiter2 = "; "
+        if phones_info or emails_info:
+            delimiter1 = ": "
+        return f"{self.name} {birthday_info}{delimiter1}{phones_info}{delimiter2}{emails_info}"
 
     def __repr__(self):
         return f"Record({str(self)})"
