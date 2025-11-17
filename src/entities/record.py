@@ -1,3 +1,4 @@
+from datetime import datetime
 from src.entities import Name, Phone, Birthday, Email, Address
 
 class Record:
@@ -27,6 +28,18 @@ class Record:
 
     def __repr__(self):
         return f"Record({str(self)})"
+
+    def display_record(self) -> str:
+        result = f"Name: {str(self.name)}"
+        if self.birthday:
+            result = result + "\nBirthday: " + datetime.strftime(self.birthday, "%d-%m-%Y")
+        if self.phones:
+            result = result + "\nPhones: " + "; ".join([str(phone) for phone in self.phones])
+        if self.emails:
+            result = result + "\nEmails: " + "; ".join([str(email) for email in self.emails])
+        if self.address:
+            result = result + f"\nAddress: {self.address}"
+        return result
 
     def add_phone(self, phone: str):
         """
@@ -165,4 +178,23 @@ class Record:
         if self.address is None:
             return ""
         return str(self.address)
+    
+    def search_by_pattern(self, pattern: str) -> str:
+        """
+        Search fields name, address, phones and emails by pattern
+        """
+        pattern_sanitized = pattern.strip().casefold()
+        results = []
+        # display_record
+        if pattern_sanitized in str(self.name).casefold():
+            results.append(f"Match by name: {str(self.name)}")
+        if self.address and pattern_sanitized in str(self.address).casefold():
+            results.append(f"Match by address: {str(self.name)}: {str(self.address)}")
+        for phone in self.phones:
+            if pattern_sanitized in str(phone).casefold():
+                results.append(f"Match by phone: {str(self.name)}: {str(phone)}")
+        for email in self.emails:
+            if pattern_sanitized in str(email).casefold():
+                results.append(f"Match by email: {str(self.name)}: {str(email)}")
+        return "\n".join(results)
     
