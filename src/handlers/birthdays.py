@@ -8,7 +8,11 @@ def birthdays(_: list[str], book: AddressBook, __):
     """
     upcoming_birthdays = book.get_upcoming_birthdays()
     upcoming_birthdays.sort(key=lambda x: x["congratulation_date"])
-    result = "\n".join([f"[{x["congratulation_date"].strftime("%d.%m.%Y")}] {str(x["record"])}"
-                        for x in upcoming_birthdays])
+    result = "\n".join(
+        [
+            f"[{x['congratulation_date'].strftime('%d.%m.%Y')}] {x['record']}"
+            for x in upcoming_birthdays
+        ]
+    )
     return result
 

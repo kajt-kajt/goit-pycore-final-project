@@ -4,6 +4,7 @@ Entry point
 
 import pickle
 from collections import defaultdict
+from colorama import Fore, Style, init
 from src.handlers import *
 from src.entities import AddressBook
 from src.entities import NoteBook
@@ -47,6 +48,8 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
     "filename" is a path to file to save database state. 
         None or empty string would indicate to work in memory only. 
     """
+
+    init(autoreset=True)
 
     if start_empty:
         contacts, notes = load_data(None)
@@ -102,8 +105,9 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
 
     # main loop
     command = ""
+    prompt_text = f"{Fore.MAGENTA}Enter a command:{Style.RESET_ALL} "
     while command not in ["close", "exit"]:
-        user_input = input("Enter a command: ")
+        user_input = input(prompt_text)
         command, *args = parse_input(user_input)
         print(handlers[command](args, contacts, notes))
 
