@@ -10,7 +10,8 @@ class Email(Field):
     """
 
     _email_regex = re.compile(
-        r"^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$"
+        r"^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@"
+        r"[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$"
     )
 
     def validate_value(self, value: str) -> str:
@@ -23,7 +24,9 @@ class Email(Field):
             raise CustomValueError("Email can not be empty.")
 
         if not self._email_regex.fullmatch(value_str):
-            error_msg = f"Email format is not valid, got '{value_str}' instead."
+            error_msg = (
+                f"Email format is not valid, got '{value_str}' instead."
+            )
             raise CustomValueError(error_msg)
 
         return value_str

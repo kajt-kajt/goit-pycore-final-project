@@ -20,7 +20,9 @@ class Birthday(Field):
         except CustomValueError as e:
             raise e
         except ValueError as e:
-            raise CustomValueError("Invalid date format. Use DD.MM.YYYY") from e
+            raise CustomValueError(
+                "Invalid date format. Use DD.MM.YYYY"
+            ) from e
         return birthdate
 
     def __str__(self):
@@ -60,7 +62,11 @@ class Birthday(Field):
             try:
                 next_birthday = birthdate.replace(year=year + 1)
             except ValueError:
-                next_birthday = birthdate.replace(year=year + 1, month=2, day=28)
+                next_birthday = birthdate.replace(
+                    year=year + 1,
+                    month=2,
+                    day=28,
+                )
 
         days_left = (next_birthday - today).days
         return days_left

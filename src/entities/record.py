@@ -1,9 +1,11 @@
 from datetime import datetime
 from src.entities import Name, Phone, Birthday, Email, Address
 
+
 class Record:
     """
-    Class representing a single record in address book with name and a list of phone numbers.
+    Class representing a single record in address book with name and a list of
+    phone numbers.
     """
     def __init__(self, name: str):
         self.name = Name(name)
@@ -24,7 +26,10 @@ class Record:
             delimiter2 = "; "
         if phones_info or emails_info:
             delimiter1 = ": "
-        return f"{self.name} {birthday_info}{delimiter1}{phones_info}{delimiter2}{emails_info}"
+        return (
+            f"{self.name} {birthday_info}"
+            f"{delimiter1}{phones_info}{delimiter2}{emails_info}"
+        )
 
     def __repr__(self):
         return f"Record({str(self)})"
@@ -32,11 +37,14 @@ class Record:
     def display_record(self) -> str:
         result = f"Name: {str(self.name)}"
         if self.birthday:
-            result = result + "\nBirthday: " + datetime.strftime(self.birthday, "%d-%m-%Y")
+            birthday_info = datetime.strftime(self.birthday, "%d-%m-%Y")
+            result = result + "\nBirthday: " + birthday_info
         if self.phones:
-            result = result + "\nPhones: " + "; ".join([str(phone) for phone in self.phones])
+            phones = "; ".join([str(phone) for phone in self.phones])
+            result = result + "\nPhones: " + phones
         if self.emails:
-            result = result + "\nEmails: " + "; ".join([str(email) for email in self.emails])
+            emails = "; ".join([str(email) for email in self.emails])
+            result = result + "\nEmails: " + emails
         if self.address:
             result = result + f"\nAddress: {self.address}"
         return result
@@ -65,7 +73,11 @@ class Record:
         """
         Remove email from list for this record
         """
-        self.emails = [email_record for email_record in self.emails if str(email_record).casefold() != email.casefold()]
+        self.emails = [
+            email_record
+            for email_record in self.emails
+            if str(email_record).casefold() != email.casefold()
+        ]
 
     def edit_phone(self, old_phone: str, new_phone: str) -> bool:
         """
@@ -188,13 +200,22 @@ class Record:
         # display_record
         if pattern_sanitized in str(self.name).casefold():
             results.append(f"Match by name: {str(self.name)}")
-        if self.address and pattern_sanitized in str(self.address).casefold():
-            results.append(f"Match by address: {str(self.name)}: {str(self.address)}")
+        if (
+            self.address
+            and pattern_sanitized in str(self.address).casefold()
+        ):
+            results.append(
+                f"Match by address: {str(self.name)}: {str(self.address)}"
+            )
         for phone in self.phones:
             if pattern_sanitized in str(phone).casefold():
-                results.append(f"Match by phone: {str(self.name)}: {str(phone)}")
+                results.append(
+                    f"Match by phone: {str(self.name)}: {str(phone)}"
+                )
         for email in self.emails:
             if pattern_sanitized in str(email).casefold():
-                results.append(f"Match by email: {str(self.name)}: {str(email)}")
+                results.append(
+                    f"Match by email: {str(self.name)}: {str(email)}"
+                )
         return "\n".join(results)
     

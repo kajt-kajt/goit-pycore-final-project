@@ -2,10 +2,11 @@ from datetime import datetime, date, timedelta
 from collections import UserDict
 from src.entities import Record
 
+
 class AddressBook(UserDict):
     """
-    Class for address book entity, extends dict, so has its main object in data field.
-    Key for the dictionary would be name as str for easier search.
+    Class for address book entity, extends dict, so has its main object in the
+    data field. Key for the dictionary would be name as str for easier search.
     """
 
     def __setitem__(self, key, item):
@@ -23,10 +24,14 @@ class AddressBook(UserDict):
 
     def add_record(self, record: Record):
         """
-        Add record to address book. If such name already exists, record will be rewritten.
+        Add record to address book. If such name already exists, record will be
+        rewritten.
         """
         if not isinstance(record, Record):
-            error_msg = f"Expecting object of type Record, but got {type(record).__name__} instead."
+            error_msg = (
+                "Expecting object of type Record, but got "
+                f"{type(record).__name__} instead."
+            )
             raise ValueError(error_msg)
         self[str(record.name)] = record
 
@@ -36,9 +41,9 @@ class AddressBook(UserDict):
         """
         return self.get(name)
 
-    def delete(self, name:str) -> Record:
+    def delete(self, name: str) -> Record:
         """
-        Delete record from address book by name and return it back. 
+        Delete record from address book by name and return it back.
         Return None if record was not found.
         """
         return self.pop(name, None)

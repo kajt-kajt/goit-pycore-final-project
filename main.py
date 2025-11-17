@@ -11,7 +11,7 @@ from src.entities import NoteBook
 
 def save_data(book: list, filename: str="books.pkl") -> None:
     """
-    Save AddressBook and NoteBook as array of 2 elements with all its object hierarchy to file in binary format
+    Save AddressBook and NoteBook to a binary file with the full object hierarchy.
     "filename" may be empty or None to indicate that no saving is necessary.
     """
     if not filename:
@@ -37,6 +37,7 @@ def load_data(filename: str="books.pkl") -> AddressBook:
         # EOFError is for wrong file format
         print(f"Warning: unable to load state from '{filename}': {e}")
         return AddressBook(), NoteBook()
+
 
 def main(start_empty: bool = False, filename: str = "books.pkl"):
     """
@@ -65,9 +66,9 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
 
     # all handlers should take 2 arguments - args list and contacts dictionary
     handlers = defaultdict(default_handler, {
-        "hello": lambda x,y,z: "How can I help you?",
-        "close": lambda x,y,z: "Good bye!",
-        "exit": lambda x,y,z: "Good bye!",
+        "hello": lambda x, y, z: "How can I help you?",
+        "close": lambda x, y, z: "Good bye!",
+        "exit": lambda x, y, z: "Good bye!",
         "add": add_contact,
         "add-phone": add_contact,
         "change": change_contact,

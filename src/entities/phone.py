@@ -3,14 +3,17 @@ import re
 from src.entities import Field
 from src import CustomValueError
 
+
 class Phone(Field):
     """
-    Class for phone number entity. Values are normalized to +380XXXXXXXXX format by default.
+    Class for phone number entity. Values are normalized to +380XXXXXXXXX
+    format by default.
     """
 
     def validate_value(self, value: str) -> str:
         """
-        Normalize phone numbers to international +380 format unless explicit country code is used.
+        Normalize phone numbers to international +380 format unless explicit
+        country code is used.
         """
         value_str = super().validate_value(value)
 
