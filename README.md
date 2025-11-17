@@ -121,4 +121,4 @@ Email: john@mail.com
 ...
 
 Enter a command: exit
-Good bye_
+Good bye!
