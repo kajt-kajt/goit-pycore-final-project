@@ -1,8 +1,18 @@
+from colorama import Fore, Style
+
 HELP_PADDING = 32
+TITLE_COLOR = Fore.LIGHTGREEN_EX
+SECTION_COLOR = Fore.MAGENTA
+COMMAND_COLOR = Fore.CYAN
+DESCRIPTION_COLOR = Fore.LIGHTWHITE_EX
 
 
 def _format_entry(command: str, description: str) -> str:
-    return f"{command.ljust(HELP_PADDING)} - {description}"
+    padded = command.ljust(HELP_PADDING)
+    return (
+        f"{COMMAND_COLOR}{padded}{Style.RESET_ALL}"
+        f" - {DESCRIPTION_COLOR}{description}{Style.RESET_ALL}"
+    )
 
 
 def show_help(_: list[str], __, ___) -> str:
@@ -32,7 +42,8 @@ def show_help(_: list[str], __, ___) -> str:
                 ("change-email <name> <old> <new>", "Replace a saved email."),
                 ("delete-email <name> [email]", "Remove an email (if only one, argument optional)."),
                 ("show-email <email>", "Find person using email."),
-                ("add-address/change-address <name> <address>", "Add or update address."),
+                ("add-address/change-address <name> <address>", "Add address."),
+                ("change-address <name> <address>", "Update address."),
                 ("delete-address <name>", "Remove saved address."),
                 ("show-address <name>", "Display address for a contact."),
                 ("show-contact <name>", "Show full record for a contact."),
@@ -44,7 +55,7 @@ def show_help(_: list[str], __, ___) -> str:
                 ("add-note <text>", "Add a new note and assign it an ID."),
                 ("show-notes", "Display all stored notes."),
                 ("add-note-tag <id> <tag>", "Attach one or more tags to a note."),
-                ("remove-note-tag <id> <tag> [tag...]", "Remove tags from a note."),
+                ("remove-note-tag <id> <tag>", "Remove tags from a note."),
                 ("delete-note <id>", "Delete a note by its ID."),
                 ("notes-by-tag <tag>", "Show all notes containing the given tag."),
             ],
@@ -58,9 +69,9 @@ def show_help(_: list[str], __, ___) -> str:
         ),
     ]
 
-    lines: list[str] = ["Welcome to the assistant bot!", ""]
+    lines: list[str] = [f"{TITLE_COLOR}Welcome to the assistant bot!{Style.RESET_ALL}", ""]
     for section_title, entries in sections:
-        lines.append(section_title)
+        lines.append(f"{SECTION_COLOR}{section_title}{Style.RESET_ALL}")
         for command, description in entries:
             lines.append(_format_entry(command, description))
         lines.append("")
@@ -69,4 +80,5 @@ def show_help(_: list[str], __, ___) -> str:
 
 
 if __name__ == "__main__":
-    print(show_help([], None))
+
+    print(show_help([], None, None))
