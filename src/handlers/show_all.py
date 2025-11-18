@@ -1,3 +1,4 @@
+from colorama import Fore, Style
 from src.entities import AddressBook
 from src.handlers.input_error import input_error
 
@@ -8,12 +9,15 @@ def _format_record(record) -> str:
     address = record.get_address()
     emails = record.get_emails()
 
+    def label(text: str) -> str:
+        return f"{Fore.LIGHTGREEN_EX}{text}{Style.RESET_ALL}"
+
     lines = [
-        f"Name: {record.name}",
-        f"Birthday: {birthday if birthday else '-'}",
-        f"Phones: {phones + ';' if phones else '-'}",
-        f"Address: {address if address else '-'}",
-        f"Emails: {emails if emails else '-'}",
+        f"{label('Name:')} {record.name}",
+        f"{label('Birthday:')} {birthday if birthday else '-'}",
+        f"{label('Phones:')} {phones + ';' if phones else '-'}",
+        f"{label('Address:')} {address if address else '-'}",
+        f"{label('Emails:')} {emails if emails else '-'}",
     ]
     return "\n".join(lines)
 

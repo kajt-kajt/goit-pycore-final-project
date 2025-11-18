@@ -69,7 +69,7 @@ def show_help(_: list[str], __, ___) -> str:
         ),
     ]
 
-    lines: list[str] = [f"{TITLE_COLOR}Welcome to the assistant bot!{Style.RESET_ALL}", ""]
+    lines: list[str] = [f"{TITLE_COLOR}Welcome to the Amadeus Assistant bot!{Style.RESET_ALL}", ""]
     for section_title, entries in sections:
         lines.append(f"{SECTION_COLOR}{section_title}{Style.RESET_ALL}")
         for command, description in entries:
