@@ -14,7 +14,7 @@ class Field:
         Raises ValueError if it is not possible.
         """
         try:
-            value_str = str(value)
+            value_str = str(value).replace("\n"," ")
             return value_str
         except Exception as e:
             input_type = type(value).__name__

@@ -33,4 +33,3 @@ def show_contact(args: list[str], contacts: AddressBook, _) -> str:
     """
     name = args[0]
     return _format_record(contacts[name])
-

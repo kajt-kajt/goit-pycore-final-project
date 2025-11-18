@@ -3,6 +3,7 @@ Entry point
 """
 
 import pickle
+import shlex
 from collections import defaultdict
 from colorama import Fore, Style, init
 from src.handlers import *
@@ -111,8 +112,21 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
     command = ""
     prompt_text = f"{Fore.MAGENTA}Enter a command:{Style.RESET_ALL} "
     while command not in ["close", "exit"]:
-        user_input = input(prompt_text)
-        command, *args = parse_input(user_input)
+        quotes_ok = False
+        full_user_input = []
+        one_cycle_prompt = prompt_text
+        while not quotes_ok:
+            user_input = input(one_cycle_prompt)
+            one_cycle_prompt = " "*16
+            full_user_input.append(user_input)
+            try:
+                shlex.split("\n".join(full_user_input))
+                quotes_ok = True
+            except ValueError as e:
+                if str(e) != "No closing quotation":
+                    print("Wrong command format")
+
+        command, *args = parse_input("\n".join(full_user_input))
         print(handlers[command](args, contacts, notes))
 
     save_data([contacts, notes], filename)
