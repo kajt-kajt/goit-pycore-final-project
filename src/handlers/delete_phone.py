@@ -3,7 +3,7 @@ from src.entities import AddressBook
 
 
 @input_error
-def delete_phone(args: list[str], contacts: AddressBook) -> str:
+def delete_phone(args: list[str], contacts: AddressBook, _) -> str:
     """
     Removes a phone number from the contact.
     If phone is not provided and only one exists, it will be removed.

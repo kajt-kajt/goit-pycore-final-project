@@ -15,7 +15,7 @@ def input_error(func: Callable) -> Callable:
         except CustomValueError as e:
             return str(e)
         except (ValueError, IndexError):
-            return "Wrong argument(-s) provided. Try again."
+            return "Wrong argument(-s) provided. Type 'help' to see available commands."
         except KeyError:
-            return "No such contact found."
+            return "No such contact found. Type 'help' to see available commands."
     return inner

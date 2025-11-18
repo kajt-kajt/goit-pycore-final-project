@@ -3,7 +3,7 @@ from src.entities import AddressBook
 
 
 @input_error
-def delete_contact(args: list[str], contacts: AddressBook) -> str:
+def delete_contact(args: list[str], contacts: AddressBook, _) -> str:
     """
     Remove entire contact record by name.
     """

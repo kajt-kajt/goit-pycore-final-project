@@ -3,7 +3,7 @@ from src.entities import AddressBook
 
 
 @input_error
-def delete_email(args: list[str], contacts: AddressBook) -> str:
+def delete_email(args: list[str], contacts: AddressBook, _) -> str:
     """
     Removes an email from the contact.
     If email is not provided and only one exists, it will be removed.
