@@ -115,8 +115,13 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
         quotes_ok = False
         full_user_input = []
         one_cycle_prompt = prompt_text
-        while not quotes_ok:
+        empty_lines_counter = 3
+        while not quotes_ok and empty_lines_counter > 0:
             user_input = input(one_cycle_prompt)
+            if user_input:
+                empty_lines_counter = 3
+            else:
+                empty_lines_counter -= 1
             one_cycle_prompt = " "*16
             full_user_input.append(user_input)
             try:
