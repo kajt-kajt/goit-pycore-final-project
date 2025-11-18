@@ -1,7 +1,8 @@
 from time import time
 from datetime import datetime
 
-class Note():
+
+class Note:
     """
     Class represents a single note entity
     """
@@ -16,6 +17,9 @@ class Note():
     def __str__(self):
         tag_line = " #".join(self.tags)
         if tag_line:
-            tag_line = "\n   #"+tag_line
-        return f"ID: {self.id}, created at {self.creation_date}\n{self._value}{tag_line}"
+            tag_line = "\n   #" + tag_line
+        return (
+            f"ID: {self.id}, created at {self.creation_date}\n"
+            f"{self._value}{tag_line}"
+        )
     

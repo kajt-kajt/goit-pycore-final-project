@@ -1,6 +1,6 @@
 class Field:
     """
-    Base class for fields in AddressBook. 
+    Base class for fields in AddressBook.
     "value" attribute is protected for better control of changes.
     """
 
@@ -10,14 +10,17 @@ class Field:
         General rule - value should be convertible to string.
         It would be a rare situation, but let's check it anyway.
         Subclasses should override it for their type of value.
-        Returns sanitized normalized value. Raises ValueError if it is not possible.
+        Returns sanitized normalized value.
+        Raises ValueError if it is not possible.
         """
         try:
             value_str = str(value)
             return value_str
         except Exception as e:
             input_type = type(value).__name__
-            error_msg = f"Field of type {input_type} is not convertible to str, error:\n {e}"
+            error_msg = (
+                f"Field of type {input_type} is not convertible to str, error:\n {e}"
+            )
             raise ValueError(error_msg) from e
 
     def __init__(self, value):

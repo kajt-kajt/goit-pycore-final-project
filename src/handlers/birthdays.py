@@ -1,8 +1,9 @@
 from src.handlers.input_error import input_error
 from src.entities import AddressBook
 
+
 @input_error
-def birthdays(args: list[str], book: AddressBook, __):
+def birthdays(args: list[str], book: AddressBook, __) -> str:
     """
     Display list of contacts for greeting for the period of time specified.
     By default period is 7 days, but may be provided as argument.
@@ -14,9 +15,12 @@ def birthdays(args: list[str], book: AddressBook, __):
         pass
 
     users_with_birthdays = [record for record in book.values() if record.birthday]
-    upcoming_birthdays = [record for record in users_with_birthdays 
-                          if record.birthday.days_to_next_birthday() <= days]
-    upcoming_birthdays.sort(key = lambda x: x.birthday.days_to_next_birthday())
+    upcoming_birthdays = [
+        record for record in users_with_birthdays
+        if record.birthday.days_to_next_birthday() <= days
+    ]
+    upcoming_birthdays.sort(
+        key=lambda record: record.birthday.days_to_next_birthday()
+    )
     result = "\n".join([str(record) for record in upcoming_birthdays])
     return result
-
