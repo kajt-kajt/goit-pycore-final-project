@@ -16,6 +16,7 @@ def add_note_tag(args: list[str], _, notes: NoteBook) -> str:
     return "Tag(-s) added."
 
 
+@input_error
 def remove_note_tag(args: list[str], _, notes: NoteBook) -> str:
     """
     Remove tag(-s) from note by its id
@@ -29,6 +30,7 @@ def remove_note_tag(args: list[str], _, notes: NoteBook) -> str:
     return "Tag(-s) removed."
 
 
+@input_error
 def show_notes_by_tag(args: list[str], _, notes: NoteBook) -> str:
     """
     Display all notes having specified tag
