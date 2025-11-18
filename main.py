@@ -108,33 +108,41 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
 
     print(show_help(None, None, None))
 
-    # main loop
-    command = ""
-    prompt_text = f"{Fore.MAGENTA}Enter a command:{Style.RESET_ALL} "
-    while command not in ["close", "exit"]:
-        quotes_ok = False
-        full_user_input = []
-        one_cycle_prompt = prompt_text
-        empty_lines_counter = 3
-        while not quotes_ok and empty_lines_counter > 0:
-            user_input = input(one_cycle_prompt)
-            if user_input:
-                empty_lines_counter = 3
-            else:
-                empty_lines_counter -= 1
-            one_cycle_prompt = " "*16
-            full_user_input.append(user_input)
-            try:
-                shlex.split("\n".join(full_user_input))
-                quotes_ok = True
-            except ValueError as e:
-                if str(e) != "No closing quotation":
-                    print("Wrong command format")
+    try:
+        # main loop
+        command = ""
+        prompt_text = f"{Fore.MAGENTA}Enter a command:{Style.RESET_ALL} "
+        while command not in ["close", "exit"]:
+            quotes_ok = False
+            full_user_input = []
+            one_cycle_prompt = prompt_text
+            empty_lines_counter = 3
+            while not quotes_ok and empty_lines_counter > 0:
+                user_input = input(one_cycle_prompt)
+                if user_input:
+                    empty_lines_counter = 3
+                else:
+                    empty_lines_counter -= 1
+                one_cycle_prompt = " "*16
+                full_user_input.append(user_input)
+                try:
+                    shlex.split("\n".join(full_user_input))
+                    quotes_ok = True
+                except ValueError as e:
+                    if str(e) != "No closing quotation":
+                        print("Wrong command format")
+                        break
 
-        command, *args = parse_input("\n".join(full_user_input))
-        print(handlers[command](args, contacts, notes))
-
-    save_data([contacts, notes], filename)
+            command, *args = parse_input("\n".join(full_user_input))
+            print(handlers[command](args, contacts, notes))
+        save_data([contacts, notes], filename)
+    except BaseException as e:
+        # Both KeyBoardInterrupt and all other possible exceptions
+        print(f"{e}")
+        user_decision = input("Do you want to save database before exit? (yes/no) ")
+        saving_db = ( user_decision.casefold() in ["y", "yes"] )
+        if saving_db:
+            save_data([contacts, notes], filename)
 
 
 if __name__ == "__main__":
