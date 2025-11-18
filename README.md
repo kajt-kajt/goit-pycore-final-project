@@ -51,6 +51,7 @@
 | Додати тег нотатці | `add-note-tag <id> urgent` |
 | Знайти нотатки за тегом | `notes-by-tag urgent` |
 | Пошук по всіх контактах | `search-contacts vasyl` |
+| Пошук по нотатках | `search-notes note` |
 | Вийти й зберегти | `close` або `exit` |
 
 ### Формати вводу
