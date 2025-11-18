@@ -62,7 +62,7 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
 
     def default_handler():
         def inner(*args, **kwargs):
-            return "Invalid command."
+            return "Invalid command. Type 'help' to see available commands."
         return inner
 
     # all handlers should take 2 arguments - args list and contacts dictionary

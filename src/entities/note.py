@@ -1,5 +1,6 @@
 from time import time
 from datetime import datetime
+from colorama import Fore, Style
 
 
 class Note:
@@ -15,13 +16,19 @@ class Note:
         self.tags = []
 
     def __str__(self):
-        tag_line = " #".join(self.tags)
-        if tag_line:
-            tag_line = "\n   #" + tag_line
-        return (
-            f"ID: {self.id}, created at {self.creation_date}\n"
-            f"{self._value}{tag_line}"
+        header = (
+            f"{Fore.LIGHTBLACK_EX}ID: {self.id}, created at {self.creation_date}"
+            f"{Style.RESET_ALL}"
         )
+
+        tag_line = ""
+        if self.tags:
+            tags = " #".join(self.tags)
+            tag_line = f"\n{Fore.LIGHTBLACK_EX}   #{tags}{Style.RESET_ALL}"
+
+        note_text = f"{Fore.CYAN}{self._value}{Style.RESET_ALL}"
+
+        return f"{header}\n{note_text}{tag_line}"
     
     def search_by_pattern(self, pattern:str) -> str:
         """
