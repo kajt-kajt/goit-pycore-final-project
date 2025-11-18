@@ -23,3 +23,12 @@ class Note:
             f"{self._value}{tag_line}"
         )
     
+    def search_by_pattern(self, pattern:str) -> str:
+        """
+        Search note text by substring
+        """
+        pattern_sanitized = pattern.casefold()
+        if pattern_sanitized in self._value.casefold():
+            return str(self)
+        return ""
+
