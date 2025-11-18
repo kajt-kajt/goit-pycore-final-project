@@ -63,6 +63,12 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
             return "Invalid command."
         return inner
 
+class Note:
+    def __init__(self, text: str, tags: list[str] = None):
+        self.text = text
+        self.tags = tags or []
+
+
     # all handlers should take 2 arguments - args list and contacts dictionary
     handlers = defaultdict(default_handler, {
         "hello": lambda x,y,z: "How can I help you?",
