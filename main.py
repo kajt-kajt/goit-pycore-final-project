@@ -66,44 +66,61 @@ def main(start_empty: bool = False, filename: str = "books.pkl"):
         return inner
 
     # all handlers should take 2 arguments - args list and contacts dictionary
-    handlers = defaultdict(default_handler, {
-        "hello": lambda x, y, z: "How can I help you?",
-        "close": lambda x, y, z: "Good bye!",
-        "exit": lambda x, y, z: "Good bye!",
-        "add": add_contact,
-        "add-phone": add_contact,
-        "change": change_contact,
-        "change-phone": change_contact,
-        "change-email": change_email,
-        "delete": delete_contact,
-        "delete-phone": delete_phone,
-        "delete-email": delete_email,
-        "delete-address": delete_address,
-        "phone": show_phone,
-        "show-phone": show_phone,
-        "all": show_all,
-        "add-birthday": add_birthday,
-        "add-email": add_email,
-        "add-address": add_address,
-        "change-address": add_address,
-        "show-birthday": show_birthday,
-        "show-email": show_email,
-        "show-address": show_address,
-        "show-contact": show_contact,
-        "birthdays": birthdays,
-        "?": show_help,
-        "help": show_help,
-        "add-note": add_note,
-        "show-notes": show_all_notes,
-        "add-note-tag": add_note_tag,
-        "remove-note-tag": remove_note_tag,
-        "delete-note-tag": remove_note_tag,
-        "remove-note": delete_note,
-        "delete-note": delete_note,
-        "notes-by-tag": show_notes_by_tag,
-        "search-contacts": search_contacts,
-        "search-notes": search_notes,
-        "search": search_books,
+    from collections import defaultdict
+
+handlers = defaultdict(default_handler, {
+
+    # --- SYSTEM / EXIT COMMANDS ---
+    "hello": lambda x, y, z: "How can I help you?",
+    "help": show_help,
+    "?": show_help,
+
+    "exit": lambda x, y, z: "Good bye!",
+    "close": lambda x, y, z: "Good bye!",
+    "bye": lambda x, y, z: "Good bye!",
+    "bye-bye": lambda x, y, z: "Good bye!",
+    "goodbye": lambda x, y, z: "Good bye!",
+    "quit": lambda x, y, z: "Good bye!",
+    "q": lambda x, y, z: "Good bye!",
+
+
+    # --- CONTACTS ---
+    "add": add_contact,
+    "add-contact": add_contact,
+    "add-phone": add_contact,
+
+    "change": change_contact,
+    "change-phone": change_contact,
+    "change-email": change_email,
+    "change-address": add_address,
+
+    "delete": delete_contact,
+    "delete-contact": delete_contact,
+
+    "delete-phone": delete_phone,
+    "remove-phone": delete_phone,
+
+    "delete-email": delete_email,
+    "remove-email": delete_email,
+
+    "delete-address": delete_address,
+    "remove-address": delete_address,
+
+    "phone": show_phone,
+    "show-phone": show_phone,
+
+    "all": show_all,
+    "show-all": show_all,
+    "all-contacts": show_all,
+
+    "show-contact": show_contact,
+
+    "search-contacts": search_contacts,
+    "find-contact": search_contacts,
+
+
+    # --- EMAIL / ADDRESS / BIRTHDAYS ---
+
     })
 
     print(show_help(None, None, None))

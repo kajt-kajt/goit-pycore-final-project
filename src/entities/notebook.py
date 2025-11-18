@@ -6,9 +6,15 @@ class NoteBook(UserDict):
     Class is for a set of notes, stored in data dict.
     Dictionary key is id of note, which is timestamp of creation
     """
-    
+
+    def create(self, text, tags=None):
+        note = Note(text, tags=tags)
+        self[note.id] = note
+        return note.id
+
     def add_note(self, note: Note) -> str:
         self[note.id] = note
+        return note.id
 
     def search_by_pattern(self, pattern: str) -> str:
         """
