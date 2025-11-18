@@ -65,6 +65,3 @@
 - `src/handlers/` — обробники команд (add/change/delete/show/search/notes/help).
 - Скрипти автозапуску/очищення: `setup_run.bat`, `assistant.bat`, `cleanup.bat`, `setup_linux.sh`, `cleanup_linux.sh`.
 - `requirements.txt` — залежності.
-
-## Тести
-- У проєкті є `test.py`. Запуск: `python test.py`
