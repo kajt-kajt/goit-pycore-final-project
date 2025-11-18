@@ -1,5 +1,6 @@
 from src.handlers.input_error import input_error
-from src.entities import NoteBook, Note
+from src.entities import NoteBook
+
 
 @input_error
 def delete_note(args: list[str], _ , notes: NoteBook) -> str:

@@ -2,6 +2,7 @@ from functools import wraps
 from typing import Callable
 from src import CustomValueError
 
+
 # handler decorator
 def input_error(func: Callable) -> Callable:
     """
